@@ -1,0 +1,7 @@
+---
+- hosts: all
+  roles:
+    - { role: docker }
+    - { role: kubeadm }
+    - { role: keepalived }
+    - { role: go }

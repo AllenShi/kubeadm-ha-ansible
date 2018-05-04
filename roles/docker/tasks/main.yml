@@ -1,0 +1,3 @@
+---
+- name: include docker ce installation
+  include_tasks: install-docker-ce.yml

@@ -1,0 +1,6 @@
+---
+- name: turn off swap
+  shell: swapoff -a
+
+- name: disable swap partition
+  shell: sed -i -e '/\/dev\/mapper.*swap.*/s/^/# /' /etc/fstab

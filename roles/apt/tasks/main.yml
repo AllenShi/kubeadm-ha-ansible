@@ -1,0 +1,3 @@
+---
+- name: install curl and apt-transport-https
+  shell: apt update && apt install -y curl apt-transport-https ca-certificates software-properties-common

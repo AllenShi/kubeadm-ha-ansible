@@ -1,0 +1,13 @@
+---
+- name: add docker signature into apt key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+- name: add apt source for docker ce
+  shell:
+    cmd: |
+      cat <<EOF >/etc/apt/sources.list.d/docker.list
+      deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable
+      EOF
+
+- name: install docker ce 
+  shell: apt update && apt install -y docker-ce=$(apt-cache madison docker-ce | grep {{ DOCKER_VERSION }} | head -1 | awk '{print $3}')
