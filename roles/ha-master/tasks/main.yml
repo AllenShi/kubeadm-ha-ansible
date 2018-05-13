@@ -1,0 +1,8 @@
+---
+- name: Update admin.conf for k8s client to use nginx LB
+  shell:
+    cmd: |
+      sed -i -r 's/https:\/\/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:6443/https:\/\/{{ K8SHA_IPVIRTUAL }}:16443/g' /etc/kubernetes/admin.conf
+
+- name: Set KUBECONFIG for master nodes
+  shell: echo "export KUBECONFIG=/etc/kubernetes/admin.conf" > /etc/profile.d/kube-adm-conf.sh && . /etc/profile.d/kube-adm-conf.sh

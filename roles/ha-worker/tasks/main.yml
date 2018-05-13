@@ -1,0 +1,9 @@
+---
+- name: Update api server in kubelet.conf and bootstrap-kubelet.conf to nginx LB
+  shell:
+    cmd: |
+      sed -i "s/{{ K8SHA_IPLOCAL }}:6443/{{ K8SHA_IPVIRTUAL }}:16443/g" /etc/kubernetes/bootstrap-kubelet.conf
+      sed -i "s/{{ K8SHA_IPLOCAL }}:6443/{{ K8SHA_IPVIRTUAL }}:16443/g" /etc/kubernetes/kubelet.conf
+
+- name: Restart kubelet and docker
+  shell: systemctl restart docker kubelet
