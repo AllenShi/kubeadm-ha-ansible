@@ -1,12 +1,3 @@
 ---
 - name: Join into cluster
-  shell: kubeadm join 172.16.189.84:6443 --token kgit0v.gwkuqq6fp8j8e080 --discovery-token-ca-cert-hash sha256:71a2dcee06d84ecc7c84f7577ef6dd6b41f16048b634bb3b80cec48ef95777d5
-
-- name: Update server to nginx LB
-  shell:
-    cmd: |
-      sed -i "s/172.16.189.84:6443/172.16.189.212:16443/g" /etc/kubernetes/bootstrap-kubelet.conf
-      sed -i "s/172.16.189.84:6443/172.16.189.212:16443/g" /etc/kubernetes/kubelet.conf
-
-- name: Restart kubelet and docker
-  shell: systemctl restart docker kubelet
+  shell: "kubeadm join {{ K8SHA_IPLOCAL }}:6443 --token kgit0v.gwkuqq6fp8j8e080 --discovery-token-ca-cert-hash sha256:71a2dcee06d84ecc7c84f7577ef6dd6b41f16048b634bb3b80cec48ef95777d5"
