@@ -1,3 +1,6 @@
 ---
-- name: Join into cluster
-  shell: "kubeadm join {{ K8SHA_IPLOCAL }}:6443 --token kgit0v.gwkuqq6fp8j8e080 --discovery-token-ca-cert-hash sha256:71a2dcee06d84ecc7c84f7577ef6dd6b41f16048b634bb3b80cec48ef95777d5"
+- name: Include task to join into cluster
+  include_tasks: join-cluster.yml
+
+- wait_for:
+    path: /etc/kubernetes/kubelet.conf 

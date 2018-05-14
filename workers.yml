@@ -1,3 +1,4 @@
 - hosts: kube-worker 
   roles:
+    - { role: go }
     - { role: worker }

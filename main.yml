@@ -1,7 +1,6 @@
 ---
-- hosts: all
-  roles:
-    - { role: docker }
-    - { role: kubeadm }
-    - { role: keepalived }
-    - { role: go }
+
+- import_playbook: masters.yml
+- import_playbook: workers.yml
+- import_playbook: ha.yml
+- import_playbook: ceph.yml
