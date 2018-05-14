@@ -1,0 +1,3 @@
+---
+- name: Label Ceph monitor node
+  shell: "kubectl label node {{ inventory_hostname }} ceph-mon=enabled ceph-mgr=enabled --kubeconfig=/etc/kubernetes/kubelet.conf"

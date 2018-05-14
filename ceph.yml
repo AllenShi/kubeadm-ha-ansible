@@ -1,0 +1,7 @@
+- hosts: ceph-mon 
+  roles:
+    - { role: ceph-mon }
+
+- hosts: ceph-osd 
+  roles:
+    - { role: ceph-osd }

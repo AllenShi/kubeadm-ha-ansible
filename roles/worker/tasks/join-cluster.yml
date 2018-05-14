@@ -1,0 +1,9 @@
+---
+- name: Check whether nodes has already been joined into cluster and kubelet is running
+  shell: /bin/netstat -an | grep 10250 | cat 
+  ignore_errors: true
+  register: kubelet_is_running 
+
+- name: Join into cluster
+  shell: "kubeadm join {{ K8SHA_IPVIRTUAL }}:16443 --token kgit0v.gwkuqq6fp8j8e080 --discovery-token-ca-cert-hash sha256:71a2dcee06d84ecc7c84f7577ef6dd6b41f16048b634bb3b80cec48ef95777d5"
+  when: kubelet_is_running.stdout == ""

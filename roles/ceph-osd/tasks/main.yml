@@ -1,0 +1,12 @@
+---
+- name: Create loop back device
+  shell:
+    cmd: |
+      mkdir -p /var/lib/ceph/image
+      fallocate -l 50G /var/lib/ceph/image/osd0.img
+      fallocate -l 50G /var/lib/ceph/image/osd1.img
+      losetup /dev/loop0 /var/lib/ceph/image/osd0.img
+      losetup /dev/loop1 /var/lib/ceph/image/osd1.img
+
+- name: Label Ceph OSD node
+  shell: "kubectl label node {{ inventory_hostname }} ceph-osd=enabled ceph-osd-device-dev-loop0=enabled ceph-osd-device-dev-loop1=enabled --kubeconfig=/etc/kubernetes/kubelet.conf"
